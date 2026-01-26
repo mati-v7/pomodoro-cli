@@ -1,0 +1,10 @@
+# Binary
+pomodoro
+
+# Object files
+*.o
+
+# Editor files
+.vscode/
+.idea/
+*.swp

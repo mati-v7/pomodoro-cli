@@ -4,5 +4,7 @@
 void start_timer(int seconds);
 void format_time(int seconds, char *buffer);
 void beep(void);
+void set_nonblocking(int enable);
+char check_input();
 
 #endif

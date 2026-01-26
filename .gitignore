@@ -4,6 +4,11 @@ pomodoro
 # Object files
 *.o
 
+# Content files
+*.txt
+*.csv
+*.json
+
 # Editor files
 .vscode/
 .idea/

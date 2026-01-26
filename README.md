@@ -1,19 +1,40 @@
 # Pomodoro C 🍅
 
-Pomodoro timer en C ejecutado desde la terminal.
-Permite configurar duración de trabajo, descansos y ciclos, y avisa con un **beep** al finalizar cada timer.
+Pomodoro Timer para terminal, escrito en **C**, con interfaz **TUI usando ncurses**, soporte de colores, estados visuales, configuración persistente y estadísticas.
 
 ## Características
 
-- Ciclos de trabajo y descanso (work / short break / long break)
-- Configurable vía argumentos de línea de comandos
-- Beep confiable usando `sox` con fallback ASCII bell
+- Interfaz TUI con ncurses
+- Estados visuales (WORK / BREAK / PAUSED)
+- Historial persistente de sesiones
+- Configuración guardada entre ejecuciones
+- Notificaciones al finalizar cada timer
+- Controles de teclado en tiempo real
+- Exportación de estadísticas
 
 ## Requisitos
 
 - GCC (compilador C)
 - Linux / Unix-like system
-- Opcional: `sox` para sonido mejorado (`sudo apt install sox`)
+- ncurses
+- Opcional: `sox` para sonido mejorado
+
+### Instalar dependencias
+
+**Debian / Ubuntu**
+```bash
+sudo apt install gcc make libncurses-dev sox
+```
+
+**Arch**
+```bash
+sudo pacman -S gcc make ncurses sox
+```
+
+**macOS**
+```bash
+brew install ncurses
+```
 
 ## Compilación
 ```bash
@@ -37,3 +58,8 @@ Ejemplo de prueba en corto tiempo entre ciclos:
 ```bash
 ./pomodoro 10 5 15 2
 ```
+
+## Autor
+
+Hecho con ❤️ en C.
+Proyecto educativo de nivel intermedio–avanzado.

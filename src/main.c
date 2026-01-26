@@ -33,7 +33,10 @@ int main(int argc, char *argv[])
         .work_duration = 1500,       // 25 min
         .short_break_duration = 300, // 5 min
         .long_break_duration = 900,  // 15 min
-        .cycles_before_long_break = 4};
+        .cycles_before_long_break = 4,
+        .enable_sound = 1,
+        .enable_desktop = 1,
+        .throttle_seconds = 3};
 
     if (cli.reset_history)
     {
@@ -91,7 +94,7 @@ int main(int argc, char *argv[])
     run_pomodoro_tui(config);
     tui_cleanup();
     save_history(config.cycles_before_long_break, HISTORY_FILE);
-    notify_desktop("Pomodoro", "Pomodoro session complete!");
+    notify_event(EVENT_POMODORO_CYCLE_DONE);
 
     if (!cli.no_stats)
     {

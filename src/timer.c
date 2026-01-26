@@ -1,5 +1,6 @@
 #include "timer.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 void format_time(int seconds, char *buffer) {
@@ -21,4 +22,17 @@ void start_timer(int seconds) {
     }
 
     printf("\n");
+    beep();
+}
+
+void beep(void) {
+    int result = system("which play > /dev/null 2>&1");
+
+    if (result == 0) {
+        system("play -nq -t alsa synth 0.2 sine 440");
+    } else {
+        // fallback: ASCII bell
+        printf("\a");
+        fflush(stdout);
+    }
 }

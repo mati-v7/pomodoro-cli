@@ -34,12 +34,6 @@ int main(int argc, char *argv[])
         .long_break_duration = 900,  // 15 min
         .cycles_before_long_break = 4};
 
-    if (cli.show_config)
-    {
-        print_config(config);
-        return 0;
-    }
-
     if (cli.reset_history)
     {
         reset_history(HISTORY_FILE);
@@ -59,6 +53,12 @@ int main(int argc, char *argv[])
         config.cycles_before_long_break = atoi(argv[4]);
 
     save_config(config, CONFIG_FILE);
+
+    if (cli.show_config)
+    {
+        print_config(config);
+        return 0;
+    }
 
     if (cli.show_stats)
     {

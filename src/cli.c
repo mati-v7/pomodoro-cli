@@ -41,10 +41,9 @@ void print_help(void)
     printf("  --reset-history   Clear history\n");
     printf("  --no-stats        Do not show statistics on start\n");
     printf("  --version         Show version\n");
-    printf("  --tui             Use text-based user interface\n");
 }
 
 void print_version(void)
 {
-    printf("Pomodoro C v1.0.0\n");
+    printf("Pomodoro C v1.1.0\n");
 }

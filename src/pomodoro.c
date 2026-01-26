@@ -11,15 +11,15 @@ void run_pomodoro_tui(PomodoroConfig config)
     for (int i = 1; i <= cycles; i++)
     {
         start_timer_tui(config.work_duration, STATE_WORK);
-        notify_desktop("Pomodoro", "Timer complete! Take a break.");
+        notify_all("Pomodoro", "Timer complete! Take a break.");
 
         if (i < cycles)
         {
             start_timer_tui(config.short_break_duration, STATE_SHORT_BREAK);
-            notify_desktop("Pomodoro", "Break over! Back to work.");
+            notify_all("Pomodoro", "Break over! Back to work.");
         }
     }
 
     start_timer_tui(config.long_break_duration, STATE_LONG_BREAK);
-    notify_desktop("Pomodoro", "Long break over!");
+    notify_all("Pomodoro", "Long break over!");
 }

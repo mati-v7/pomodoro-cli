@@ -20,6 +20,10 @@ CliOptions parse_cli(int argc, char *argv[])
             opts.no_stats = 1;
         else if (strcmp(argv[i], "--version") == 0)
             opts.show_version = 1;
+        else if (strcmp(argv[i], "--export") == 0 && i + 1 < argc)
+        {
+            strncpy(opts.export_format, argv[++i], sizeof(opts.export_format) - 1);
+        }
     }
 
     return opts;

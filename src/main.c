@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "pomodoro.h"
 #include "cli.h"
 #include "stats.h"
 #include "storage.h"
+#include "export.h"
 
 #define CONFIG_FILE "config.txt"
 #define HISTORY_FILE "history.txt"
@@ -66,18 +68,36 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    if (cli.export_format[0])
+    {
+        if (strcmp(cli.export_format, "csv") == 0)
+        {
+            export_csv(HISTORY_FILE, "stats.csv");
+            printf("Exported to stats.csv\n");
+        }
+        else if (strcmp(cli.export_format, "json") == 0)
+        {
+            export_json(HISTORY_FILE, "stats.json");
+            printf("Exported to stats.json\n");
+        }
+        else
+        {
+            printf("Unsupported format: %s\n", cli.export_format);
+        }
+        return 0;
+    }
+
     printf("Pomodoro C 🍅\n");
     printf("Press P to pause and R to resume the timer.\n");
-    
+
     if (!cli.no_stats)
     {
         PomodoroStats stats = load_stats(HISTORY_FILE);
         print_stats(stats);
     }
-    
+
     run_pomodoro_cycle(total_cycles, config);
     save_history(total_cycles, HISTORY_FILE);
-
 
     return 0;
 }

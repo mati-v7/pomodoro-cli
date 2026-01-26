@@ -8,6 +8,7 @@ typedef struct {
     int reset_history;
     int no_stats;
     int show_version;
+    char export_format[8];
 } CliOptions;
 
 CliOptions parse_cli(int argc, char *argv[]);

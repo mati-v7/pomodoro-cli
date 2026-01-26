@@ -63,3 +63,19 @@ int save_history(int completed_pomodoros, const char *filename)
     fclose(f);
     return 1;
 }
+
+void print_config(PomodoroConfig config) {
+    printf("\n  Current Configuration\n");
+    printf("────────────────────────\n");
+    printf("Work               : %d min\n", config.work_duration / 60);
+    printf("Short break        : %d min\n", config.short_break_duration / 60);
+    printf("Long break         : %d min\n", config.long_break_duration / 60);
+    printf("Cycles per session : %d\n", config.cycles_before_long_break);
+}
+
+int reset_history(const char *filename) {
+    FILE *f = fopen(filename, "w");
+    if (!f) return 0;
+    fclose(f);
+    return 1;
+}

@@ -45,5 +45,5 @@ void print_help(void)
 
 void print_version(void)
 {
-    printf("Pomodoro C v1.1.0\n");
+    printf("Pomodoro C v1.2.0\n");
 }

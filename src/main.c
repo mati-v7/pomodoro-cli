@@ -47,8 +47,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    int total_cycles = 4;
-
     load_config(&config, CONFIG_FILE);
 
     if (argc >= 2)
@@ -88,26 +86,16 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    if (cli.use_tui)
-    {
-        tui_init();
-        run_pomodoro_tui(config);
-        tui_cleanup();
-        save_history(config.cycles_before_long_break, HISTORY_FILE);
-        return 0;
-    }
-
-    printf("Pomodoro C 🍅\n");
-    printf("Press P to pause and R to resume the timer.\n");
+    tui_init();
+    run_pomodoro_tui(config);
+    tui_cleanup();
+    save_history(config.cycles_before_long_break, HISTORY_FILE);
 
     if (!cli.no_stats)
     {
         PomodoroStats stats = load_stats(HISTORY_FILE);
         print_stats(stats);
     }
-
-    run_pomodoro_cycle(total_cycles, config);
-    save_history(total_cycles, HISTORY_FILE);
 
     return 0;
 }

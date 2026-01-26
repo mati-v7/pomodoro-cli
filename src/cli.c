@@ -24,8 +24,6 @@ CliOptions parse_cli(int argc, char *argv[])
         {
             strncpy(opts.export_format, argv[++i], sizeof(opts.export_format) - 1);
         }
-        else if (strcmp(argv[i], "--tui") == 0)
-            opts.use_tui = 1;
     }
 
     return opts;

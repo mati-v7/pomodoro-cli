@@ -7,6 +7,7 @@
 #include "storage.h"
 #include "export.h"
 #include "tui.h"
+#include "notifications.h"
 
 #define CONFIG_FILE "config.txt"
 #define HISTORY_FILE "history.txt"
@@ -90,6 +91,7 @@ int main(int argc, char *argv[])
     run_pomodoro_tui(config);
     tui_cleanup();
     save_history(config.cycles_before_long_break, HISTORY_FILE);
+    notify_desktop("Pomodoro", "Pomodoro session complete!");
 
     if (!cli.no_stats)
     {

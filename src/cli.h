@@ -9,6 +9,7 @@ typedef struct {
     int no_stats;
     int show_version;
     char export_format[8];
+    int use_tui;
 } CliOptions;
 
 CliOptions parse_cli(int argc, char *argv[]);

@@ -6,6 +6,7 @@
 #include "stats.h"
 #include "storage.h"
 #include "export.h"
+#include "tui.h"
 
 #define CONFIG_FILE "config.txt"
 #define HISTORY_FILE "history.txt"
@@ -84,6 +85,15 @@ int main(int argc, char *argv[])
         {
             printf("Unsupported format: %s\n", cli.export_format);
         }
+        return 0;
+    }
+
+    if (cli.use_tui)
+    {
+        tui_init();
+        run_pomodoro_tui(config);
+        tui_cleanup();
+        save_history(total_cycles, HISTORY_FILE);
         return 0;
     }
 

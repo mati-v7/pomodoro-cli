@@ -24,6 +24,8 @@ CliOptions parse_cli(int argc, char *argv[])
         {
             strncpy(opts.export_format, argv[++i], sizeof(opts.export_format) - 1);
         }
+        else if (strcmp(argv[i], "--tui") == 0)
+            opts.use_tui = 1;
     }
 
     return opts;
@@ -41,6 +43,7 @@ void print_help(void)
     printf("  --reset-history   Clear history\n");
     printf("  --no-stats        Do not show statistics on start\n");
     printf("  --version         Show version\n");
+    printf("  --tui             Use text-based user interface\n");
 }
 
 void print_version(void)

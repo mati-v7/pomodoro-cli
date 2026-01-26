@@ -1,4 +1,5 @@
 #include "timer.h"
+#include "tui.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -52,6 +53,36 @@ void start_timer(int seconds)
     set_nonblocking(0);
     printf("\n");
     beep();
+}
+
+void start_timer_tui(int seconds, const char *label)
+{
+    int total = seconds;
+    int paused = 0;
+
+    while (seconds >= 0)
+    {
+        tui_draw_timer(seconds, total, paused, label);
+
+        int ch = tui_handle_input();
+        if (ch == 'p')
+            paused = 1;
+        else if (ch == 'r')
+            paused = 0;
+        else if (ch == 'q')
+            break;
+
+        if (!paused)
+        {
+            sleep(1);
+            seconds--;
+        }
+        else
+        {
+            struct timespec ts = {0, 100000000};
+            nanosleep(&ts, NULL);
+        }
+    }
 }
 
 void beep(void)

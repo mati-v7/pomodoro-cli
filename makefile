@@ -1,13 +1,24 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -D_POSIX_C_SOURCE=199309L
+LDFLAGS = -lncurses
 
-SRC = src/main.c src/timer.c src/pomodoro.c src/storage.c src/stats.c src/cli.c src/export.c
-TARGET = pomodoro
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:.c=.o)
 
-all: $(TARGET)
+BIN = pomodoro
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+all: $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(BIN) $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+run: $(BIN)
+	./$(BIN)
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(BIN)
+
+.PHONY: all run clean

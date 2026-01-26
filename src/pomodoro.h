@@ -15,5 +15,6 @@ typedef struct {
 } PomodoroConfig;
 
 void run_pomodoro_cycle(int total_cycles, PomodoroConfig config);
+void run_pomodoro_tui(PomodoroConfig config);
 
 #endif

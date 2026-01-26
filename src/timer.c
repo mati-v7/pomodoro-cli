@@ -55,14 +55,14 @@ void start_timer(int seconds)
     beep();
 }
 
-void start_timer_tui(int seconds, const char *label)
+void start_timer_tui(int seconds, PomodoroState state)
 {
     int total = seconds;
     int paused = 0;
 
     while (seconds >= 0)
     {
-        tui_draw_timer(seconds, total, paused, label);
+        tui_draw_timer(seconds, total, paused, state);
 
         int ch = tui_handle_input();
         if (ch == 'p')

@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
         tui_init();
         run_pomodoro_tui(config);
         tui_cleanup();
-        save_history(total_cycles, HISTORY_FILE);
+        save_history(config.cycles_before_long_break, HISTORY_FILE);
         return 0;
     }
 

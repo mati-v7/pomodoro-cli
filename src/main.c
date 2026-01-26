@@ -1,8 +1,11 @@
 #include <stdio.h>
-#include "timer.h"
+#include "pomodoro.h"
 
 int main(void) {
     printf("Pomodoro C 🍅\n");
-    start_timer(10);
+
+    int total_cycles = 4;
+    run_pomodoro_cycle(total_cycles);
+    
     return 0;
 }

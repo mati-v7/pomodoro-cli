@@ -22,6 +22,12 @@ int load_config(PomodoroConfig *config, const char *filename)
             config->long_break_duration = val;
         else if (sscanf(line, "cycles_before_long_break=%d", &val) == 1)
             config->cycles_before_long_break = val;
+        else if (sscanf(line, "enable_sound=%d", &val) == 1)
+            config->enable_sound = val;
+        else if (sscanf(line, "enable_desktop=%d", &val) == 1)
+            config->enable_desktop = val;
+        else if (sscanf(line, "throttle_seconds=%d", &val) == 1)
+            config->throttle_seconds = val;
     }
 
     fclose(f);
@@ -38,6 +44,9 @@ int save_config(PomodoroConfig config, const char *filename)
     fprintf(f, "short_break_duration=%d\n", config.short_break_duration);
     fprintf(f, "long_break_duration=%d\n", config.long_break_duration);
     fprintf(f, "cycles_before_long_break=%d\n", config.cycles_before_long_break);
+    fprintf(f, "enable_sound=%d\n", config.enable_sound);
+    fprintf(f, "enable_desktop=%d\n", config.enable_desktop);
+    fprintf(f, "throttle_seconds=%d\n", config.throttle_seconds);
 
     fclose(f);
     return 1;
@@ -64,18 +73,25 @@ int save_history(int completed_pomodoros, const char *filename)
     return 1;
 }
 
-void print_config(PomodoroConfig config) {
+void print_config(PomodoroConfig config)
+{
     printf("\n  Current Configuration\n");
     printf("────────────────────────\n");
-    printf("Work               : %d min\n", config.work_duration / 60);
-    printf("Short break        : %d min\n", config.short_break_duration / 60);
-    printf("Long break         : %d min\n", config.long_break_duration / 60);
-    printf("Cycles per session : %d\n", config.cycles_before_long_break);
+    printf("Work                         : %d min\n", config.work_duration / 60);
+    printf("Short break                  : %d min\n", config.short_break_duration / 60);
+    printf("Long break                   : %d min\n", config.long_break_duration / 60);
+    printf("Cycles per session           : %d\n", config.cycles_before_long_break);
+    printf("────────────────────────\n");
+    printf("Enable Sound                 : %d\n", config.enable_sound);
+    printf("Enable Desktop Notifications : %d\n", config.enable_desktop);
+    printf("Throttle seconds             : %d\n", config.throttle_seconds);
 }
 
-int reset_history(const char *filename) {
+int reset_history(const char *filename)
+{
     FILE *f = fopen(filename, "w");
-    if (!f) return 0;
+    if (!f)
+        return 0;
     fclose(f);
     return 1;
 }

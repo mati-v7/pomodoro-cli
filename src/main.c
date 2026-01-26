@@ -7,6 +7,7 @@
 #include "storage.h"
 #include "export.h"
 #include "tui.h"
+#include "notifications.h"
 
 #define CONFIG_FILE "config.txt"
 #define HISTORY_FILE "history.txt"
@@ -32,13 +33,10 @@ int main(int argc, char *argv[])
         .work_duration = 1500,       // 25 min
         .short_break_duration = 300, // 5 min
         .long_break_duration = 900,  // 15 min
-        .cycles_before_long_break = 4};
-
-    if (cli.show_config)
-    {
-        print_config(config);
-        return 0;
-    }
+        .cycles_before_long_break = 4,
+        .enable_sound = 1,
+        .enable_desktop = 1,
+        .throttle_seconds = 3};
 
     if (cli.reset_history)
     {
@@ -59,6 +57,12 @@ int main(int argc, char *argv[])
         config.cycles_before_long_break = atoi(argv[4]);
 
     save_config(config, CONFIG_FILE);
+
+    if (cli.show_config)
+    {
+        print_config(config);
+        return 0;
+    }
 
     if (cli.show_stats)
     {
@@ -90,6 +94,7 @@ int main(int argc, char *argv[])
     run_pomodoro_tui(config);
     tui_cleanup();
     save_history(config.cycles_before_long_break, HISTORY_FILE);
+    notify_event(EVENT_POMODORO_CYCLE_DONE);
 
     if (!cli.no_stats)
     {

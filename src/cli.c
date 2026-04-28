@@ -43,6 +43,14 @@ void print_help(void)
     printf("  --version         Show version\n");
 }
 
+/**
+ * @brief Print the program version to standard output.
+ *
+ * Prints the hard-coded version string "Pomodoro C v1.2.0" followed by a newline.
+ *
+ * @return void
+ * @note This function writes directly to stdout as a side effect.
+ */
 void print_version(void)
 {
     printf("Pomodoro C v1.2.0\n");
